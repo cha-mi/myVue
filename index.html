@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{person.name}} -- {{person.age}}</h2>
+        <h3>{{person.fav}}</h3>
+        <div v-text="msg"></div>
+        <div v-text="person.fav"></div>
+        <div v-html="htmlStr"></div>
+        <input type="text" v-model="person.fav">
+        <button v-on:click="handleClick">click</button>
+        <button @click="handleClick2">click2</button>
+    </div>
+    <div id="app2">
+        <h2>{{person.name}} -- {{person.age}}</h2>
+        <h3>{{person.fav}}</h3>
+        <div v-text="msg"></div>
+        <div v-text="person.fav"></div>
+        <div v-html="htmlStr"></div>
+        <input type="text" v-model="person.fav">
+        <button @click="handleClick3">click3</button>
+    </div>
+</body>
+<script type="module">
+    import MyVue from "./MyVue.js"
+    let vm = new MyVue({
+        el: '#app',
+        data() {
+            return {
+                person: {
+                    name: 'lxc',
+                    age: 18,
+                    fav: 'JS'
+                },
+                msg: '可接受的',
+                htmlStr: '<div>节点</div>'
+            }
+        },
+        method: {
+            handleClick() {
+                this.htmlStr='<div>更新</div>'
+            },
+            handleClick2() {
+                this.msg='更新'
+                this.person.name='更新'
+                this.person.age='更新'
+            }
+        }
+    })
+    let vm2 = new MyVue({
+        el: '#app2',
+        data() {
+            return {
+                person: {
+                    name: 'lxc',
+                    age: 18,
+                    fav: 'JS'
+                },
+                msg: '可接受的',
+                htmlStr: '<div>节点</div>'
+            }
+        },
+        method: {
+            handleClick3() {
+                this.htmlStr='<div>更新</div>'
+            }
+        }
+    })
+    console.log(vm.$data)
+</script>
+</html>
